@@ -1,6 +1,12 @@
-## Facebook Profile Image Downloader
+# Facebook Profile Image Downloader
 
-Download Facebook profile images by username or profile URL using Node.js.
+Download Facebook profile images by username or profile URL using a simple web interface or command line.
+
+## Features
+- Web interface for easy downloading
+- Command line interface for automation
+- Supports both usernames and profile URLs
+- Saves images in high quality
 
 ## Setup
 
@@ -9,15 +15,33 @@ Download Facebook profile images by username or profile URL using Node.js.
    npm install
    ```
 
-2. Usage:
+## Running the Web Interface
+
+1. Start the web server:
    ```bash
-   node index.js <facebook_username_or_url>
+   npm start
    ```
-   Example:
-   ```bash
-   node index.js zuck
-   node index.js https://facebook.com/zuck
+
+2. Open your browser and visit:
    ```
+   http://localhost:3000
+   ```
+
+3. Enter a Facebook username or profile URL and click "Download"
+
+## Command Line Usage
+
+You can also use the tool directly from the command line:
+
+```bash
+node index.js <facebook_username_or_url>
+```
+
+Examples:
+```bash
+node index.js zuck
+node index.js https://facebook.com/zuck
+```
 
 The profile image will be saved in the current directory as `<username>_profile.jpg` (or the correct extension).
 

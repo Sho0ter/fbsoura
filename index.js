@@ -562,19 +562,19 @@ app.post('/download-all', express.json(), async (req, res) => {
   }
 });
 
-// CLI usage: node index.js <facebook_username_or_url>
-if (process.env.RUN_SERVER) {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log('Use /download?profile=<facebook_username_or_url> to download a profile image.');
-  });
-} else if (require.main === module) {
-  const input = process.argv[2];
-  if (!input) {
-    console.log('Usage: node index.js <facebook_username_or_url>');
-    process.exit(1);
+// Start the server by default
+if (require.main === module) {
+  // If command line arguments are provided, run in CLI mode
+  if (process.argv[2]) {
+    const input = process.argv[2];
+    downloadFacebookProfileImage(input)
+      .then(({ fileName }) => console.log(`Downloaded profile image as ${fileName}`))
+      .catch(err => console.error('Failed to download profile image:', err.message));
+  } else {
+    // Otherwise, start the web server
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+      console.log('Open in your browser and enter a Facebook username or profile URL to download images.');
+    });
   }
-  downloadFacebookProfileImage(input)
-    .then(({ fileName }) => console.log(`Downloaded profile image as ${fileName}`))
-    .catch(err => console.error('Failed to download profile image:', err.message));
 }
